@@ -6,6 +6,13 @@ the [stephenh/ts-proto](https://github.com/stephenh/ts-proto) plugin.
 
 # Usage 
 
+```bash
+$ bazel build //proto:thing_ts_proto_compile
 ```
-bazel build //proto:thing_ts_proto_compile
+
+To regenerate or update the BUILD file:
+
+```bash
+$ rm proto/BUILD.bazel # not needed to update it, but to demonstrate that it can be created from scratch
+$ bazel run //:gazelle
 ```
