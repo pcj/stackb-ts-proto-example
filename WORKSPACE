@@ -1,21 +1,23 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 # --- build_stack_rules_proto ---
 
-# Commit: df8f82e4fb806e07362aa37f7eb23b2e18cca5ae
-# Date: 2021-10-29 16:18:29 +0000 UTC
-# URL: https://github.com/stackb/rules_proto/commit/df8f82e4fb806e07362aa37f7eb23b2e18cca5ae
+# Commit: cf3f47ea65021dc5b23b229e93be61dc191a7aba
+# Date: 2021-10-29 17:29:58 +0000 UTC
+# URL: https://github.com/stackb/rules_proto/commit/cf3f47ea65021dc5b23b229e93be61dc191a7aba
 #
-# Update README; use canonical labels
-# Size: 877766 (878 kB)
-# http_archive(
-#     name = "build_stack_rules_proto",
-#     sha256 = "e707173400a15982ccc1147ea58ef81f65d414e5c33b45b505110b53d4d23a76",
-#     strip_prefix = "rules_proto-df8f82e4fb806e07362aa37f7eb23b2e18cca5ae",
-#     urls = ["https://github.com/stackb/rules_proto/archive/df8f82e4fb806e07362aa37f7eb23b2e18cca5ae.tar.gz"],
-# )
-local_repository(
+# Add yaml deps to gazelle_protobuf_extension_deps
+# Size: 877744 (878 kB)
+http_archive(
     name = "build_stack_rules_proto",
-    path = "../rules_proto",
+    sha256 = "f46b8d3ce8708120ea0643a1211b57cb59c0da3e92302c68ee003dfa8acf6814",
+    strip_prefix = "rules_proto-cf3f47ea65021dc5b23b229e93be61dc191a7aba",
+    urls = ["https://github.com/stackb/rules_proto/archive/cf3f47ea65021dc5b23b229e93be61dc191a7aba.tar.gz"],
 )
+# local_repository(
+#     name = "build_stack_rules_proto",
+#     path = "../rules_proto",
+# )
 
 register_toolchains("@build_stack_rules_proto//toolchain:standard")
 
