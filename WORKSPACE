@@ -1,5 +1,3 @@
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-
 # --- build_stack_rules_proto ---
 
 # Commit: df8f82e4fb806e07362aa37f7eb23b2e18cca5ae
@@ -8,17 +6,16 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 #
 # Update README; use canonical labels
 # Size: 877766 (878 kB)
-http_archive(
-    name = "build_stack_rules_proto",
-    sha256 = "e707173400a15982ccc1147ea58ef81f65d414e5c33b45b505110b53d4d23a76",
-    strip_prefix = "rules_proto-df8f82e4fb806e07362aa37f7eb23b2e18cca5ae",
-    urls = ["https://github.com/stackb/rules_proto/archive/df8f82e4fb806e07362aa37f7eb23b2e18cca5ae.tar.gz"],
-)
-
-# local_repository(
+# http_archive(
 #     name = "build_stack_rules_proto",
-#     path = "../rules_proto",
+#     sha256 = "e707173400a15982ccc1147ea58ef81f65d414e5c33b45b505110b53d4d23a76",
+#     strip_prefix = "rules_proto-df8f82e4fb806e07362aa37f7eb23b2e18cca5ae",
+#     urls = ["https://github.com/stackb/rules_proto/archive/df8f82e4fb806e07362aa37f7eb23b2e18cca5ae.tar.gz"],
 # )
+local_repository(
+    name = "build_stack_rules_proto",
+    path = "../rules_proto",
+)
 
 register_toolchains("@build_stack_rules_proto//toolchain:standard")
 
@@ -43,6 +40,18 @@ load(
 go_rules_dependencies()
 
 go_register_toolchains(version = "1.16.2")
+
+# --- gazelle ---
+
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+
+gazelle_dependencies()
+
+# --- gazelle extension dependencies ---
+
+load("@build_stack_rules_proto//:go_deps.bzl", "gazelle_protobuf_extension_go_deps")
+
+gazelle_protobuf_extension_go_deps()
 
 # --- nodejs ---
 
