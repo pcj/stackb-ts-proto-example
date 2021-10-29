@@ -1,0 +1,25 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
+load("@build_stack_rules_proto//rules/ts:ts_proto_library.bzl", "ts_proto_library")
+
+proto_library(
+    name = "place_proto",
+    srcs = ["place.proto"],
+    visibility = ["//visibility:public"],
+    deps = ["//proto/thing:thing_proto"],
+)
+
+proto_compile(
+    name = "place_ts_proto_compile",
+    options = {"@build_stack_rules_proto//plugin/stephenh/ts-proto:protoc-gen-ts-proto": ["emitImportedFiles=false"]},
+    outputs = ["place.ts"],
+    plugins = ["@build_stack_rules_proto//plugin/stephenh/ts-proto:protoc-gen-ts-proto"],
+    proto = "place_proto",
+)
+
+ts_proto_library(
+    name = "place_ts_proto",
+    srcs = [":place_ts_proto_compile"],
+    visibility = ["//visibility:public"],
+    deps = ["//proto/thing:thing_ts_proto"],
+)

@@ -1,6 +1,10 @@
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-
 # --- build_stack_rules_proto ---
+# workspace(
+#     name = "com_github_stackb_example",
+#     managed_directories = {"@npm": ["node_modules"]},
+# )
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 # Commit: cf3f47ea65021dc5b23b229e93be61dc191a7aba
 # Date: 2021-10-29 17:29:58 +0000 UTC
@@ -8,16 +12,22 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 #
 # Add yaml deps to gazelle_protobuf_extension_deps
 # Size: 877744 (878 kB)
-http_archive(
-    name = "build_stack_rules_proto",
-    sha256 = "f46b8d3ce8708120ea0643a1211b57cb59c0da3e92302c68ee003dfa8acf6814",
-    strip_prefix = "rules_proto-cf3f47ea65021dc5b23b229e93be61dc191a7aba",
-    urls = ["https://github.com/stackb/rules_proto/archive/cf3f47ea65021dc5b23b229e93be61dc191a7aba.tar.gz"],
-)
-# local_repository(
+# http_archive(
 #     name = "build_stack_rules_proto",
-#     path = "../rules_proto",
+#     sha256 = "f46b8d3ce8708120ea0643a1211b57cb59c0da3e92302c68ee003dfa8acf6814",
+#     strip_prefix = "rules_proto-cf3f47ea65021dc5b23b229e93be61dc191a7aba",
+#     urls = ["https://github.com/stackb/rules_proto/archive/cf3f47ea65021dc5b23b229e93be61dc191a7aba.tar.gz"],
 # )
+local_repository(
+    name = "build_stack_rules_proto",
+    path = "../rules_proto",
+)
+
+http_archive(
+    name = "build_bazel_rules_nodejs",
+    sha256 = "4501158976b9da216295ac65d872b1be51e3eeb805273e68c516d2eb36ae1fbb",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/4.4.1/rules_nodejs-4.4.1.tar.gz"],
+)
 
 register_toolchains("@build_stack_rules_proto//toolchain:standard")
 
@@ -66,3 +76,18 @@ nodejs_deps()
 load("@build_stack_rules_proto//deps:ts_proto_deps.bzl", "ts_proto_deps")
 
 ts_proto_deps()
+
+# --- nodejs ---
+
+load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "yarn_install")
+
+node_repositories(
+    package_json = ["//:package.json"],
+)
+
+yarn_install(
+    name = "npm",
+    frozen_lockfile = True,
+    package_json = "//:package.json",
+    yarn_lock = "//:yarn.lock",
+)
