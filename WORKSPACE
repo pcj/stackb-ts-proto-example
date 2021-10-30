@@ -6,22 +6,24 @@
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-# Commit: cf3f47ea65021dc5b23b229e93be61dc191a7aba
-# Date: 2021-10-29 17:29:58 +0000 UTC
-# URL: https://github.com/stackb/rules_proto/commit/cf3f47ea65021dc5b23b229e93be61dc191a7aba
+# --- overrides ---
+
+# Commit: f78e67636510a7774ae63c78d202dcd87429c145
+# Date: 2021-10-30 00:00:13 +0000 UTC
+# URL: https://github.com/stackb/rules_proto/commit/f78e67636510a7774ae63c78d202dcd87429c145
 #
-# Add yaml deps to gazelle_protobuf_extension_deps
-# Size: 877744 (878 kB)
-# http_archive(
-#     name = "build_stack_rules_proto",
-#     sha256 = "f46b8d3ce8708120ea0643a1211b57cb59c0da3e92302c68ee003dfa8acf6814",
-#     strip_prefix = "rules_proto-cf3f47ea65021dc5b23b229e93be61dc191a7aba",
-#     urls = ["https://github.com/stackb/rules_proto/archive/cf3f47ea65021dc5b23b229e93be61dc191a7aba.tar.gz"],
-# )
-local_repository(
+# Rewrite with tsc action
+# Size: 879130 (879 kB)
+http_archive(
     name = "build_stack_rules_proto",
-    path = "../rules_proto",
+    sha256 = "33def3d4932c34e7ffa1e0648430951d48cebc2412a1caf4754a831d2ca0c92f",
+    strip_prefix = "rules_proto-f78e67636510a7774ae63c78d202dcd87429c145",
+    urls = ["https://github.com/stackb/rules_proto/archive/f78e67636510a7774ae63c78d202dcd87429c145.tar.gz"],
 )
+# local_repository(
+#     name = "build_stack_rules_proto",
+#     path = "../rules_proto",
+# )
 
 http_archive(
     name = "build_bazel_rules_nodejs",
