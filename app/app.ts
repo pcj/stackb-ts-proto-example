@@ -1,9 +1,13 @@
 import { Thing } from 'unity/proto/thing/thing';
-// import { Place } from 'unity/proto/place/place';
+import { Place } from 'unity/proto/place/place';
 
 const thing: Thing = {
-    id: "world",
-    // createdAt: undefined,
+    id: "chair",
 };
 
-console.log(`Hello, ${thing.id}!`);
+const place: Place = {
+    name: "room",
+    thing: thing,
+};
+
+console.log(`${JSON.stringify(place)}`);

@@ -14,16 +14,16 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 #
 # Rewrite with tsc action
 # Size: 879130 (879 kB)
-http_archive(
-    name = "build_stack_rules_proto",
-    sha256 = "33def3d4932c34e7ffa1e0648430951d48cebc2412a1caf4754a831d2ca0c92f",
-    strip_prefix = "rules_proto-f78e67636510a7774ae63c78d202dcd87429c145",
-    urls = ["https://github.com/stackb/rules_proto/archive/f78e67636510a7774ae63c78d202dcd87429c145.tar.gz"],
-)
-# local_repository(
+# http_archive(
 #     name = "build_stack_rules_proto",
-#     path = "../rules_proto",
+#     sha256 = "33def3d4932c34e7ffa1e0648430951d48cebc2412a1caf4754a831d2ca0c92f",
+#     strip_prefix = "rules_proto-f78e67636510a7774ae63c78d202dcd87429c145",
+#     urls = ["https://github.com/stackb/rules_proto/archive/f78e67636510a7774ae63c78d202dcd87429c145.tar.gz"],
 # )
+local_repository(
+    name = "build_stack_rules_proto",
+    path = "../rules_proto",
+)
 
 http_archive(
     name = "build_bazel_rules_nodejs",
